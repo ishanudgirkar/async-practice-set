@@ -37,9 +37,9 @@
 //   fakeFetch(`https://example.com/post/comments`)
 //   .then(res => {
 //     for(let i = 0; i < res.data.length;i++){
-//         output1.innerHTML += `<ol><li>${res.data[i].email}</li></ol>`
+//         output1.innerHTML += `<li>${res.data[i].email}</li>`
 //     }
-//   } )
+//   } ).catch(err =>  output1.innerText = err.message)
 
 
 //Q2 Use this URL - https://example.com/winner-team to make a fake fetch call to the get names of winner group members and
@@ -72,7 +72,7 @@
 //   fakeFetch(`https://example.com/winner-team`)
 //   .then(res => {
 //     output2.innerText = `Congratulation to the members of winning team ${res.data.data} great work keep it up` 
-//   } )
+//   } ).catch(err =>  output2.innerText = err.message)
 
 
 //Q3 Use this URL - https://example.com/login to make a fake fetch call and show the status like it is authenticated or
@@ -101,7 +101,13 @@
 //   };
 
 //   fakeFetch(`https://example.com/login`)
-//   .then(res => output3.innerText = `Verified`)
+//   .then(res =>{
+//     if(res.data.auth){
+//         output3.innerText = `Verified`
+//     }else{
+//         output3.innerText = ` Not Verified`
+//     }
+//   })
 //   .catch(err => output3.innerText = err.message)
 
 
@@ -170,6 +176,7 @@
 
 //   fakeFetch(`https://example.com/photo`)
 //   .then(res => output5.innerHTML = `<img src =${res.data.photo.link}>` )
+//   .catch(err => output5.innerText = err.message)
 
 
 //Q6 Use this URL - https://example.com/api/productlist to make a fake fetch call and print the total price of all the products.
@@ -208,6 +215,7 @@
 //     }
 //     output6.innerText = `Total : INR ${total}`
 //   })
+//   .catch(err => output6.innerText = err.message)
 
 
 //Q7 Use this URL - https://example.com/api/users to make a fake fetch call and handle errors if any.
@@ -310,9 +318,13 @@
 //   };
 
 
-//   fakeFetch(`https://example.com/welcome`)
+//   fakeFetch(`https://example.com/welcom`)
 //   .then(res => output9.innerText =`Welcome buddy !`)
-//   .catch(err => output9.innerText = `Welcome to the server`)
+//   .catch(err => {
+//     if(err.status === 511){
+//       output9.innerText = `${err.message}`;
+//     }
+//   })
 
 //Q10 Use this URL - https://example.com/getImage to make a fake fetch call which takes a url and dimensions for the photo to 
 //be displayed. Dimensions should be passed in the format [width, height]. Show the image provided in the response on DOM. 
@@ -320,29 +332,29 @@
 
 //Dimensions can be 200/300/100. For example you can pass [200, 200] or [200, 300], etc.
 
-const fakeFetch = (url, dimensions) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (url === "https://example.com/getImage") {
-          resolve({
-            status: 200,
-          data: {
-             image: {
-                link: `https://picsum.photos/${dimensions[0]}/${dimensions[1]}`,
-              title: "Random Image"
-            }
-          }
-        });
-      } else {
-          reject({
-            status: 404,
-          message: "No photo of such dimension found"
-        });
-      }
-    }, 2000);
-  });
-  }
+// const output10 = document.querySelector('#outputQ10')
+
+// const fakeFetch = (url, dimensions) => {
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         if (url === "https://example.com/getImage") {
+//           resolve({
+//             status: 200,
+//           data: {
+//              image: {
+//                 link: `https://picsum.photos/${dimensions[0]}/${dimensions[1]}`,
+//               title: "Random Image"
+//             }
+//           }
+//         });
+//       } else {
+//           reject({
+//             status: 404,
+//           message: "No photo of such dimension found"
+//         });
+//       }
+//     }, 2000);
+//   });
+//   }
 
   
-
-const output10 = document.querySelector('#outputQ10')
