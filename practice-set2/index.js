@@ -332,29 +332,38 @@
 
 //Dimensions can be 200/300/100. For example you can pass [200, 200] or [200, 300], etc.
 
-// const output10 = document.querySelector('#outputQ10')
+const output10 = document.querySelector('#outputQ10')
 
-// const fakeFetch = (url, dimensions) => {
-//     return new Promise((resolve, reject) => {
-//       setTimeout(() => {
-//         if (url === "https://example.com/getImage") {
-//           resolve({
-//             status: 200,
-//           data: {
-//              image: {
-//                 link: `https://picsum.photos/${dimensions[0]}/${dimensions[1]}`,
-//               title: "Random Image"
-//             }
-//           }
-//         });
-//       } else {
-//           reject({
-//             status: 404,
-//           message: "No photo of such dimension found"
-//         });
-//       }
-//     }, 2000);
-//   });
-//   }
+const fakeFetch = (url, dimensions) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (url === "https://example.com/getImage") {
+          resolve({
+            status: 200,
+          data: {
+             image: {
+                link: `https://picsum.photos/${dimensions[0]}/${dimensions[1]}`,
+              title: "Random Image"
+            }
+          }
+        });
+      } else {
+          reject({
+            status: 404,
+          message: "No photo of such dimension found"
+        });
+      }
+    }, 2000);
+  });
+  }
+
+  let arrImg = [400,200];
+
+  fakeFetch(`https://example.com/getImage`,arrImg)
+  .then(res => output10.innerHTML = `<img src=https://picsum.photos/${arrImg[0]}/${arrImg[1]}>`)
+  .catch(err => output10.innerText = err.message) 
+
+
+
 
   
